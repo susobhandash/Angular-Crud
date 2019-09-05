@@ -1,0 +1,74 @@
+<div class="row no-gutters p-2">
+  <ng-container *ngIf="!showList">
+    <div class="col-lg-3 col-md-6 col-sm-6 p-2 " *ngFor="let note of notes">
+      <div class="card shadow border rounded border-info">
+        <div class="card-body p-3">
+          <h5 class="card-title border-bottom border-info pb-2 text-truncate">{{note.title}}</h5>
+          <p class="card-text mb-2">{{note.body}}</p>
+          <div class="w-100 mt-2 pt-2 border-top text-right">
+            <button mat-stroked-button mat-fab-button color="accent" class="mr-2">
+              <mat-icon aria-hidden="false">delete</mat-icon>
+              Delete
+            </button>
+            <button mat-stroked-button color="primary" (click)="openEditModal(editNote, note)">
+              <mat-icon aria-hidden="false">edit</mat-icon>
+              Edit
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </ng-container>
+  <ng-container *ngIf="showList">
+    <div class="example-container mat-elevation-z8 w-100">
+      <table style="width: 100%" class="table table-hover">
+        <thead>
+          <tr>
+            <th *ngFor="let column of displayedColumns; let i = index;" [style.width]="i === 0 ? '20%' : (i === 1 ? '30%' : '50%')">{{column}}</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let column of notes">
+            <td>
+              <button mat-icon-button [matMenuTriggerFor]="menu" [matMenuTriggerData]="{colData: column}" aria-label="Example icon-button with a menu">
+                <mat-icon>more_vert</mat-icon>
+              </button>
+              {{column.id}}
+            </td>
+            <td>{{column.title}}</td>
+            <td>{{column.body}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+</div>
+
+<ng-template #editNote>
+  <h1 class="mb-0" mat-dialog-title>Edit Note</h1>
+  <div mat-dialog-content *ngIf="data">
+    <mat-form-field class="w-100">
+      <input matInput placeholder="Title" [(ngModel)]="data.title">
+    </mat-form-field>
+    <mat-form-field class="w-100">
+      <textarea matInput placeholder="Message" [(ngModel)]="data.body"></textarea>
+    </mat-form-field>
+  </div>
+  <div mat-dialog-actions class="w-100 text-right mt-1 pt-1">
+    <button mat-stroked-button mat-dialog-close rows="10" color="accent" class="mr-2">Close</button>
+    <button mat-raised-button color="primary" cdkFocusInitial (click)="updateNote(data)">Update</button>
+  </div>
+</ng-template>
+
+<mat-menu #menu="matMenu">
+  <ng-template matMenuContent let-colData="colData">
+    <button mat-menu-item (click)="openEditModal(editNote, colData)">
+      <mat-icon>edit</mat-icon>
+      <span>Edit</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>delete</mat-icon>
+      <span>Delete</span>
+    </button>
+  </ng-template>
+</mat-menu>

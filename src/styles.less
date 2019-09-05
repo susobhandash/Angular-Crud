@@ -1,1 +1,31 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
+body {
+    background: #000;
+}
+
+.border {
+    border: 1px solid #0366d6;
+}
+
+.text-right {
+    justify-content: flex-end;
+}
+
+.mat-expansion-panel-body {
+    max-height: calc(100vh - 425px);
+    overflow: auto;
+}
+
+.cursor-pointer {
+    cursor: pointer;
+}
+
+thead tr th {
+    background-color: #78909C !important;
+    color: #fff !important;
+    top: 0px;
+    position: sticky;
+    z-index: 100;
+}
