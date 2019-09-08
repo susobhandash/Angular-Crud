@@ -75,4 +75,27 @@ export class ViewNoteComponent implements OnInit, OnChanges {
     this.dialogRef.close();
   }
 
+  deleteNote(note) {
+    const toDelete = {...note};
+    this.messageService.deleteNote(note).subscribe(data => {
+      this.removeNote(toDelete);
+      this.errMessage = {
+        msg: 'Data deleted successfully',
+        type: 'success'
+      };
+      this.noteUpdate.emit(this.errMessage);
+    },
+    error => {
+      this.errMessage = {
+        msg: error.message,
+        type: 'error'
+      };
+      this.noteUpdate.emit(this.errMessage);
+    });
+  }
+
+  removeNote(toDelete) {
+    this.notes.splice((this.notes.indexOf(toDelete)), 1);
+  }
+
 }

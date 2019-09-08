@@ -48,4 +48,8 @@ export class MessageService {
       }
       ));
   }
+
+  deleteNote(obj) {
+    return this.http.delete(this.url + '/' + obj.id);
+  }
 }

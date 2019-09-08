@@ -6,7 +6,7 @@
           <h5 class="card-title border-bottom border-info pb-2 text-truncate">{{note.title}}</h5>
           <p class="card-text mb-2">{{note.body}}</p>
           <div class="w-100 mt-2 pt-2 border-top text-right">
-            <button mat-stroked-button mat-fab-button color="accent" class="mr-2">
+            <button mat-stroked-button mat-fab-button color="accent" class="mr-2" (click)="deleteNote(note)">
               <mat-icon aria-hidden="false">delete</mat-icon>
               Delete
             </button>
@@ -66,7 +66,7 @@
       <mat-icon>edit</mat-icon>
       <span>Edit</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item (click)="deleteNote(colData)">
       <mat-icon>delete</mat-icon>
       <span>Delete</span>
     </button>
